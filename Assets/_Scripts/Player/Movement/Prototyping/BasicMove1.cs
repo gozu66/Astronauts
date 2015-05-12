@@ -20,6 +20,6 @@ public class BasicMove1 : MonoBehaviour
 		myRbody.AddForce(myTransform.right		*	(strafeSpeed	*	Input.GetAxis("Horizontal")));		//RIGHT + LEFT PHYSICS FORCES INPUT
 
 		myRbody.AddTorque(myTransform.up		*	(rotationSpeed	*	Input.GetAxis("Mouse X")));			//ROTATIONAL PHYSICS FORCES INPUT
-		myRbody.AddTorque(myTransform.up		*	(rotationSpeed	*	Input.GetAxis("Horizontal")));			//ROTATIONAL PHYSICS FORCES INPUT
+//		myRbody.AddTorque(myTransform.up		*	(rotationSpeed	*	Input.GetAxis("Horizontal")));		//ROTATIONAL PHYSICS FORCES INPUT
 	}
 }
