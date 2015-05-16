@@ -3,48 +3,56 @@ using System.Collections;
 
 public class PlayerMove : MonoBehaviour 
 {
-	public float speed, strafeSpeed, rotationSpeed;				//MOVEMENT SPEED	//ROTATION SPEED
+	public float speed, strafeSpeed, rotationSpeed;										//MOVEMENT SPEED	//ROTATION SPEED
 	public float mouseSensitivity = 1.0f, jumpForce;
 	float V, H;
 
 	Rigidbody myRbody;											
-	Transform myTransform, cameraTransf;						//CAMERA TRANSFORM  //TRANSFORM COMPONENT
+	Transform myTransform;																//TRANSFORM COMPONENT
 
 	public static bool playerIsMoving;
+	public static bool isGrounded;
 
 	void Start () 
 	{
-		myRbody = GetComponent<Rigidbody>();					//CACHING RIGIDBODY
-		myTransform = GetComponent<Transform>();				//CACHING TRANSFORM
-		cameraTransf = Camera.main.GetComponent<Transform>();	//CACHING CAMERA TRANSFORM
+		myRbody = GetComponent<Rigidbody>();											//CACHING RIGIDBODY
+		myTransform = GetComponent<Transform>();										//CACHING TRANSFORM
 	}
-	
-	void FixedUpdate () 
+
+	void FixedUpdate () 																//FIXED UPDATE FOR PHYSICS
 	{			
-		myRbody.AddForce(myTransform.forward * (speed*Input.GetAxis("Vertical")));					//FORWAR+BACK PHYSICS FORCES INPUT
-
-		transform.Rotate(0, Input.GetAxis("Horizontal")*rotationSpeed, 0);							//ROTATIONAL FORCES ON KEYS
-
-		if(V != 0 && H == 0)
-			transform.Rotate(0, (Input.GetAxisRaw("Mouse X")*rotationSpeed)*mouseSensitivity, 0);	//ROTATIONAL FORCES ON MOUSE (WHEN MOVING)
-
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			myRbody.velocity += new Vector3(0, jumpForce, 0);
-			Debug.Log("SPACE");
-		}
+		if(isGrounded)
+		myRbody.AddForce(myTransform.forward * (speed*Input.GetAxis("Vertical")));		//FWD + BCK PHYSICS FORCES + INPUT
 	}
 
 	void Update()
 	{
-		V = Input.GetAxis("Vertical");
-		H = Input.GetAxis("Horizontal");
+		V = Input.GetAxis("Vertical");													//CACHING AXES
+		H = Input.GetAxis("Horizontal");												//...
+
+		transform.Rotate(0, Input.GetAxis("Horizontal")*rotationSpeed, 0);				//ROTATIONAL FORCES ON KEYS
+
+		if(isGrounded)
+		{
+			if(Input.GetKeyDown(KeyCode.Space) && isGrounded)							//.. 
+			{																			//JUMP ON INPUT
+				myRbody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);		//..
+			}																			//..
+		}
 
 		if(V != 0 || H != 0){
-			playerIsMoving = true;
-		}
-		if(V == 0 && H == 0){
-			playerIsMoving = false;		
-		}
+			playerIsMoving = true;														//SETTING STAIC BOOL "PLAYERISMOVING"
+		}																				//ON INPUT
+		if(V == 0 && H == 0){															//..
+			playerIsMoving = false;														//..
+		}																				//..
+
+		RaycastHit hit;
+		if(Physics.Raycast(transform.position, -Vector3.up, out hit, 1.5f))				//..
+		{																				//RAYCASH FOR GROUNDCHECK
+			isGrounded = true;															//GROUNDED BOOLEAN
+		} else {																		//..
+			isGrounded = false;															//..
+		}																				//..
 	}
 }

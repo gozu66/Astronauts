@@ -992,7 +992,7 @@ MonoBehaviour:
   lookPoint: {fileID: 1932003091}
   movePoint: {fileID: 1039289632}
   cameraPivot: {fileID: 573778396}
-  camMoveSpeed: 5
+  camMoveSpeed: .5
   Sensitivity: 2
 --- !u!54 &1075709340
 Rigidbody:
@@ -1297,8 +1297,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1677727734}
   - 33: {fileID: 1677727737}
-  - 65: {fileID: 1677727736}
   - 23: {fileID: 1677727735}
+  - 135: {fileID: 1677727736}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -1345,8 +1345,8 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!65 &1677727736
-BoxCollider:
+--- !u!135 &1677727736
+SphereCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1355,8 +1355,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: .5
+  m_Center: {x: 0, y: 2.38418579e-07, z: 0}
 --- !u!33 &1677727737
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1446,10 +1446,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
+  m_Radius: .889999986
+  m_Height: 3.22000003
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: .610000014, z: 0}
 --- !u!33 &1932003095
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 75
   strafeSpeed: 50
-  rotationSpeed: 3.5
+  rotationSpeed: .75
   mouseSensitivity: 1
   jumpForce: 25
 --- !u!1 &2062435455
