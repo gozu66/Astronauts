@@ -21,7 +21,6 @@ public class PlayerMove : MonoBehaviour
 
 	void FixedUpdate () 																//FIXED UPDATE FOR PHYSICS
 	{			
-		if(isGrounded)
 		myRbody.AddForce(myTransform.forward * (speed*Input.GetAxis("Vertical")));		//FWD + BCK PHYSICS FORCES + INPUT
 	}
 

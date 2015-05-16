@@ -22,11 +22,13 @@ public class PlayerCamera : MonoBehaviour
 	void Update()
 	{
 		myTransform.LookAt(lookPoint.position, (Vector3.up));																	//LOOK TOWARDS TARGET
-		myTransform.RotateAround(cameraPivot.position, Vector3.up, (Sensitivity*Input.GetAxis("Mouse X")));						//ENABLE MOUSE ORBIT
-		cameraPivot.Rotate(Vector3.up, Sensitivity*Input.GetAxis("Mouse X"));
+		if(Input.GetAxis("Horizontal")==0)
+		{
+			myTransform.RotateAround(cameraPivot.position, Vector3.up, (Sensitivity*Input.GetAxis("Mouse X")));					//ENABLE MOUSE ORBIT
+			cameraPivot.Rotate(Vector3.up, Sensitivity*Input.GetAxis("Mouse X"));}
 	}
 
-	void FixedUpdate()				//FIXED UPDATE FOR PHYSICS
+	void FixedUpdate()											//FIXED UPDATE FOR PHYSICS
 	{
 		camRbody.MovePosition(Vector3.SmoothDamp(myTransform.position, movePoint.position, ref refVelocity, camMoveSpeed));		//MOVE CAMERA RIGIDBOSY
 	}
