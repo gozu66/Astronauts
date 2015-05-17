@@ -576,6 +576,8 @@ MonoBehaviour:
   idleDist: 3
   followDist: 7
   catchUpDist: 15
+  speed: 1
+  rotationSpeed: 1
 --- !u!54 &550678354
 Rigidbody:
   m_ObjectHideFlags: 0

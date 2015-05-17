@@ -11,13 +11,15 @@ public class Follower : MonoBehaviour
 	public FollowerStates _state;
 
 	Transform player, myTransform;
+	Rigidbody myRbody;
 	float distanceToPlayer;
-	public float idleDist, followDist, catchUpDist;
+	public float idleDist, followDist, catchUpDist, speed, rotationSpeed;
 
 	void Start()
 	{
 		player = FindObjectOfType<PlayerMove>().transform;
 		myTransform = GetComponent<Transform>();
+		myRbody = GetComponent<Rigidbody>();
 	}
 
 	void Update()
@@ -65,6 +67,9 @@ public class Follower : MonoBehaviour
 
 	void CatchupUpdate()
 	{
-
+		Vector3 moveVector = player.transform.position - myTransform.position;
+		float randomRotation = Random.Range(100f,110f);
+		myRbody.AddForce(moveVector * speed * Time.deltaTime);
+		myTransform.LookAt(player.position * rotationSpeed * Time.deltaTime);
 	}
 }
