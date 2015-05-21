@@ -10,6 +10,8 @@ public class PlayerMove : MonoBehaviour
 	Rigidbody myRbody;											
 	Transform myTransform;																//TRANSFORM COMPONENT
 
+	public Transform camPivot, playerMesh;
+
 	public static bool playerIsMoving;
 	public static bool isGrounded;
 
@@ -20,8 +22,15 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	void FixedUpdate () 																//FIXED UPDATE FOR PHYSICS
-	{			
-		myRbody.AddForce(myTransform.forward * (speed*Input.GetAxis("Vertical")));		//FWD + BCK PHYSICS FORCES + INPUT
+	{	
+		myRbody.AddForce(camPivot.forward * (speed*Input.GetAxis("Vertical")));			//FWD + BCK PHYSICS FORCES + INPUT
+		myRbody.AddForce(camPivot.right * (speed*Input.GetAxis("Horizontal")));			//FWD + BCK PHYSICS FORCES + INPUT
+
+		if(playerIsMoving)
+		{
+			Quaternion newFace = Quaternion.LookRotation(new Vector3(myRbody.velocity.x, 0, myRbody.velocity.z));
+			playerMesh.rotation = Quaternion.Slerp(playerMesh.rotation, newFace, rotationSpeed);//(new Vector3(myRbody.velocity.x, 0, myRbody.velocity.z) * Time.deltaTime);
+		}
 	}
 
 	void Update()
@@ -29,15 +38,10 @@ public class PlayerMove : MonoBehaviour
 		V = Input.GetAxis("Vertical");													//CACHING AXES
 		H = Input.GetAxis("Horizontal");												//...
 
-		transform.Rotate(0, Input.GetAxis("Horizontal")*rotationSpeed, 0);				//ROTATIONAL FORCES ON KEYS
-
-		if(isGrounded)
+		if(Input.GetKeyDown(KeyCode.Space) && isGrounded)								//.. 
 		{
-			if(Input.GetKeyDown(KeyCode.Space) && isGrounded)							//.. 
-			{																			//JUMP ON INPUT
-				myRbody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);		//..
-			}																			//..
-		}
+			myRbody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);		
+		} 
 
 		if(V != 0 || H != 0){
 			playerIsMoving = true;														//SETTING STAIC BOOL "PLAYERISMOVING"
