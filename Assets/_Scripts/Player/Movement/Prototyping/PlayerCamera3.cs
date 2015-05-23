@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerCamera : MonoBehaviour 
+public class PlayerCamera3 : MonoBehaviour 
 {
 	public Transform lookPoint, movePoint, cameraPivot;			//POINT TO LOOK TOWARDS		//POINT TO MOVE TOWARDS
 	public float camMoveSpeed = 0.3f, Sensitivity = 1.0f;		//CAMERA MOVESPEED			//CAMERA LOOK SENSITIVITY
@@ -22,8 +22,8 @@ public class PlayerCamera : MonoBehaviour
 	void Update()
 	{
 		myTransform.LookAt(lookPoint.position, (Vector3.up));																	//LOOK TOWARDS TARGET
-		myTransform.RotateAround(cameraPivot.position, Vector3.up, (Sensitivity*Input.GetAxis("Mouse X")));						//ENABLE MOUSE ORBIT
-		cameraPivot.Rotate(Vector3.up, Sensitivity*Input.GetAxis("Mouse X"));
+//		myTransform.RotateAround(cameraPivot.position, Vector3.up, (Sensitivity*Input.GetAxis("Mouse X")));						//ENABLE MOUSE ORBIT
+//		cameraPivot.Rotate(Vector3.up, Sensitivity*Input.GetAxis("Mouse X"));
 	}
 
 	void FixedUpdate()											//FIXED UPDATE FOR PHYSICS

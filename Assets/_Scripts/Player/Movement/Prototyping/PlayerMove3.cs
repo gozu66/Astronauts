@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMove : MonoBehaviour 
+public class PlayerMove3 : MonoBehaviour 
 {
 	public float speed, strafeSpeed, rotationSpeed;										//MOVEMENT SPEED	//ROTATION SPEED
 	public float mouseSensitivity = 1.0f, jumpForce;
@@ -23,18 +23,22 @@ public class PlayerMove : MonoBehaviour
 
 	void FixedUpdate () 																//FIXED UPDATE FOR PHYSICS
 	{	
-		myRbody.AddForce(camPivot.forward * (speed*Input.GetAxis("Vertical")));			//FWD + BCK PHYSICS FORCES + INPUT
-		myRbody.AddForce(camPivot.right * (speed*Input.GetAxis("Horizontal")));			//FWD + BCK PHYSICS FORCES + INPUT
+		myRbody.AddForce(myTransform.forward * (speed*Input.GetAxis("Vertical")));			//FWD + BCK PHYSICS FORCES + INPUT
+		myRbody.AddForce(myTransform.right * (speed*Input.GetAxis("Horizontal")));			//FWD + BCK PHYSICS FORCES + INPUT
 
-		if(playerIsMoving)
-		{
-			Quaternion newFace = Quaternion.LookRotation(new Vector3(myRbody.velocity.x, 0, myRbody.velocity.z));
-			playerMesh.rotation = Quaternion.Slerp(playerMesh.rotation, newFace, rotationSpeed);//(new Vector3(myRbody.velocity.x, 0, myRbody.velocity.z) * Time.deltaTime);
-		}
+//		if(playerIsMoving)
+//		{
+//			Quaternion newFace = Quaternion.LookRotation(new Vector3(myRbody.velocity.x, 0, myRbody.velocity.z));
+//			playerMesh.rotation = Quaternion.Slerp(playerMesh.rotation, newFace, rotationSpeed);//(new Vector3(myRbody.velocity.x, 0, myRbody.velocity.z) * Time.deltaTime);
+//		}
 	}
 
 	void Update()
 	{
+		if(V >= 0){
+			myTransform.Rotate(myTransform.up, rotationSpeed * (Time.deltaTime * Input.GetAxis("Mouse X")));
+		}
+
 		V = Input.GetAxis("Vertical");													//CACHING AXES
 		H = Input.GetAxis("Horizontal");												//...
 

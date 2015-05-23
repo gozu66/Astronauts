@@ -920,7 +920,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1039289631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.65999985, z: -10.6000004}
+  m_LocalPosition: {x: 0, y: 5.15999985, z: -10.3699999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 573778396}
@@ -937,8 +937,8 @@ GameObject:
   - 92: {fileID: 1075709336}
   - 124: {fileID: 1075709335}
   - 81: {fileID: 1075709334}
-  - 54: {fileID: 1075709340}
   - 114: {fileID: 1075709339}
+  - 54: {fileID: 1075709340}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1026,8 +1026,8 @@ MonoBehaviour:
   lookPoint: {fileID: 1932003091}
   movePoint: {fileID: 1039289632}
   cameraPivot: {fileID: 573778396}
-  camMoveSpeed: 1
-  Sensitivity: 1
+  camMoveSpeed: .5
+  Sensitivity: 2
 --- !u!54 &1075709340
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1041,7 +1041,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 64
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &1261930110
 GameObject:
@@ -1574,14 +1574,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1932003090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 114b99e2d7dc4a74bbee84e18ff69ca6, type: 3}
+  m_Script: {fileID: 11500000, guid: 593008f7759397841967a04a7c322d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 75
-  strafeSpeed: 0
-  rotationSpeed: 75
+  strafeSpeed: 50
+  rotationSpeed: .100000001
   mouseSensitivity: 1
-  jumpForce: 0
+  jumpForce: 25
   camPivot: {fileID: 573778396}
   playerMesh: {fileID: 1261930111}
 --- !u!1 &2062435455

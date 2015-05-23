@@ -17,7 +17,7 @@ public class Follower : MonoBehaviour
 
 	void Start()
 	{
-		player = FindObjectOfType<PlayerMove>().transform;
+		player = FindObjectOfType<PlayerMove1>().transform;
 		myTransform = GetComponent<Transform>();
 		myRbody = GetComponent<Rigidbody>();
 	}
