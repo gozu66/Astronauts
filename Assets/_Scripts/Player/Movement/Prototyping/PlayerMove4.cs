@@ -23,9 +23,16 @@ public class PlayerMove4 : MonoBehaviour
 	
 	void FixedUpdate () 																//FIXED UPDATE FOR PHYSICS
 	{	
-		myRbody.AddForce(Vector3.forward * (speed*Input.GetAxis("Vertical")));			//FWD + BCK PHYSICS FORCES + INPUT
-		myRbody.AddForce(Vector3.right * (speed*Input.GetAxis("Horizontal")));			//FWD + BCK PHYSICS FORCES + INPUT
-		
+		if(V != 0 && H == 0){
+			myRbody.AddForce(camPivot.forward * (speed*Input.GetAxis("Vertical")));			//FWD + BCK PHYSICS FORCES + INPUT
+		}else if(V == 0 && H != 0){
+			myRbody.AddForce(camPivot.right * (speed*Input.GetAxis("Horizontal")));			//FWD + BCK PHYSICS FORCES + INPUT
+		}else if(V != 0 && H != 0){
+			myRbody.AddForce(camPivot.forward * ((speed/2)*Input.GetAxis("Vertical")));
+			myRbody.AddForce(camPivot.right * ((speed/2)*Input.GetAxis("Horizontal")));
+		}
+
+
 		if(playerIsMoving)
 		{
 			Quaternion newFace = Quaternion.LookRotation(new Vector3(myRbody.velocity.x, 0, myRbody.velocity.z));
@@ -57,5 +64,15 @@ public class PlayerMove4 : MonoBehaviour
 		} else {																		//..
 			isGrounded = false;															//..
 		}																				//..
+	}
+
+	public void SpeedEdit(float newSpeed)
+	{
+		speed = newSpeed;
+	}
+
+	public void RSpeedEdit(float newRSpeed)
+	{
+		rotationSpeed = newRSpeed;
 	}
 }

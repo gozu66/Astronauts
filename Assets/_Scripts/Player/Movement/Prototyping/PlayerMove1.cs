@@ -54,4 +54,14 @@ public class PlayerMove1 : MonoBehaviour
 			isGrounded = false;															//..
 		}																				//..
 	}
+
+	public void SpeedEdit(float newSpeed)
+	{
+		speed = newSpeed;
+	}
+
+	public void RSpeedEdit(float newRSpeed)
+	{
+		rotationSpeed = newRSpeed;
+	}
 }
