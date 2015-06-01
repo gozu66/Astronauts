@@ -12,14 +12,18 @@ public class Follower : MonoBehaviour
 
 	Transform player, myTransform;
 	Rigidbody myRbody;
+	NavMeshAgent myAgent;
 	float distanceToPlayer;
 	public float idleDist, followDist, catchUpDist, speed, rotationSpeed;
 
 	void Start()
 	{
-		player = FindObjectOfType<PlayerMove1>().transform;
+		player = FindObjectOfType<PlayerMove>().transform;
 		myTransform = GetComponent<Transform>();
 		myRbody = GetComponent<Rigidbody>();
+		myAgent = GetComponent<NavMeshAgent>();
+
+
 	}
 
 	void Update()
@@ -57,19 +61,29 @@ public class Follower : MonoBehaviour
 
 	void IdleUpdate()
 	{
-
+		myAgent.speed = 0;
+		myAgent.destination = player.position;
 	}
 
 	void FollowUpdate()
 	{
-
+//		Vector3 moveVector = player.transform.position - myTransform.position;
+//		float randomRotation = Random.Range(100f,110f);
+//		myRbody.AddForce(moveVector * (speed - 5) * Time.deltaTime);
+//		myTransform.LookAt(player.position * rotationSpeed * Time.deltaTime);
+//		myAgent.destination = player.position;
+		myAgent.speed = 12;
+		myAgent.destination = player.position;
 	}
 
 	void CatchupUpdate()
 	{
-		Vector3 moveVector = player.transform.position - myTransform.position;
-		float randomRotation = Random.Range(100f,110f);
-		myRbody.AddForce(moveVector * speed * Time.deltaTime);
-		myTransform.LookAt(player.position * rotationSpeed * Time.deltaTime);
+//		Vector3 moveVector = player.transform.position - myTransform.position;
+//		float randomRotation = Random.Range(100f,110f);
+//		myRbody.AddForce(moveVector * speed * Time.deltaTime);
+//		myTransform.LookAt(player.position * rotationSpeed * Time.deltaTime);
+//		myAgent.destination = player.position;
+		myAgent.speed = 15;
+		myAgent.destination = player.position;
 	}
 }
