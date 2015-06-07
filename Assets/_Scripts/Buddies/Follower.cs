@@ -4,6 +4,7 @@ using System.Collections;
 public class Follower : MonoBehaviour 
 {
 	public enum FollowerStates{											//STATES ENUM
+		inactive,
 		idle,															//..
 		follow,															//..
 		catchUp,
@@ -23,25 +24,47 @@ public class Follower : MonoBehaviour
 		myRbody = GetComponent<Rigidbody>();
 		myAgent = GetComponent<NavMeshAgent>();
 
-
+		_state = FollowerStates.inactive;
 	}
 
 	void Update()
 	{
 		distanceToPlayer = Vector3.Distance(myTransform.position, player.position);			//CHECK DISTANCE TO PLAYER AND..
-																							//..
-		if(distanceToPlayer < idleDist)														//ASSIGN STATE ACCORDING TO DIST
-		{																					//..
-			_state = FollowerStates.idle;													//..
-		}																					//..
-		else if (distanceToPlayer > idleDist && distanceToPlayer < catchUpDist) 
+
+		if(_state == FollowerStates.inactive)
 		{
-			_state = FollowerStates.follow;
+			if(Input.GetMouseButtonDown(0))
+			{
+				if(distanceToPlayer <= idleDist)
+				{
+					_state = FollowerStates.idle;
+				}
+			}
+		}else{
+
+			if(Input.GetMouseButtonDown(0))
+			{
+				if(distanceToPlayer <= idleDist)
+				{
+					_state = FollowerStates.inactive;
+					return;
+				}
+			}
+
+			if(distanceToPlayer < idleDist)														//ASSIGN STATE ACCORDING TO DIST
+			{																					//..
+				_state = FollowerStates.idle;													//..
+			}																					//..
+			else if (distanceToPlayer > idleDist && distanceToPlayer < catchUpDist) 
+			{
+				_state = FollowerStates.follow;
+			}
+			else if (distanceToPlayer > catchUpDist) 
+			{
+				_state = FollowerStates.catchUp;
+			}
 		}
-		else if (distanceToPlayer > catchUpDist) 
-		{
-			_state = FollowerStates.catchUp;
-		}
+
 
 		switch(_state)										//SWITCH STATEMENT 
 		{													//FOR...SWITCHING
@@ -86,4 +109,9 @@ public class Follower : MonoBehaviour
 		myAgent.speed = 15;
 		myAgent.destination = player.position;
 	}
+
+//	FollowerStates ActivateFollower()
+//	{
+//
+//	}
 }
