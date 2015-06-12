@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Grid
+  m_Name: Grid 2
   m_Shader: {fileID: 4800000, guid: 406a976191e8366459222b654c60e1f8, type: 3}
   m_ShaderKeywords: _EMISSION _EMISSIONMAP _LIGHTMAPPING_DYNAMIC_LIGHTMAPS _LIGHTMAPPING_REALTIME
     _UVSEC_UV1
@@ -161,7 +161,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .882352948, g: 1, b: .975659192, a: 1}
+        second: {r: .742697775, g: 1, b: .566176474, a: 1}
       data:
         first:
           name: _SpecColor
